@@ -4,7 +4,7 @@ Hệ thống ETL & Data Warehouse phục vụ phân tích thị trường việc
 ## 1. Introduction
 
 DaNang-Job-Market-Data-Warehouse-ETL-Pipeline là dự án xây dựng hệ thống ETL & Data Warehouse nhằm thu thập, xử lý và phân tích dữ liệu thị trường việc làm tại Đà Nẵng.
-Mục tiêu chính là tạo ra **nguồn dữ liệu tập trung – có cấu trúc **– sẵn sàng cho phân tích như xu hướng tuyển dụng, nhu cầu kỹ năng và báo cáo phục vụ ra quyết định.
+Mục tiêu chính là tạo ra **nguồn dữ liệu tập trung – có cấu trúc**– sẵn sàng cho phân tích như xu hướng tuyển dụng, nhu cầu kỹ năng và báo cáo phục vụ ra quyết định.
 
 ---
 

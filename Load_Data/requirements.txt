@@ -1,0 +1,8 @@
+sqlalchemy
+asyncpg
+pandas
+requests
+passlib
+bcrypt
+python-dotenv
+psycopg2-binary

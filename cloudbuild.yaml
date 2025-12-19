@@ -1,0 +1,19 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Bước 1: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: Build
+    args: 
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/hr-data-pipeline-repo/data-pipeline:$COMMIT_SHA' 
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/hr-data-pipeline-repo/data-pipeline:latest'
+      - '.' 
+  
+# Cloud Build sẽ tự động ĐẨY (PUSH) các Image được liệt kê tại đây lên Artifact Registry.
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/hr-data-pipeline-repo/data-pipeline:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/hr-data-pipeline-repo/data-pipeline:latest'

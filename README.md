@@ -1,90 +1,82 @@
-📊 DaNang-Job-Market-Data-Warehouse-ETL-Pipeline
+# 📊 DaNang-Job-Market-Data-Warehouse-ETL-Pipeline
+Hệ thống ETL & Data Warehouse phục vụ phân tích thị trường việc làm Đà Nẵng
 
-Hệ thống ETL & Data Warehouse phục vụ phân tích thị trường việc làm tại Đà Nẵng
+## 1. Introduction
 
-🧭 Giới thiệu
+DaNang-Job-Market-Data-Warehouse-ETL-Pipeline là dự án xây dựng hệ thống ETL & Data Warehouse nhằm thu thập, xử lý và phân tích dữ liệu thị trường việc làm tại Đà Nẵng.
+Mục tiêu chính là tạo ra **nguồn dữ liệu tập trung – có cấu trúc **– sẵn sàng cho phân tích như xu hướng tuyển dụng, nhu cầu kỹ năng và báo cáo phục vụ ra quyết định.
 
-DaNang-Job-Market-Data-Warehouse-ETL-Pipeline là dự án xây dựng hệ thống thu thập – xử lý – lưu trữ – phân tích dữ liệu tuyển dụng từ nhiều nguồn khác nhau.
-Dự án hướng tới việc tạo ra một nền tảng dữ liệu tập trung, có khả năng mở rộng, phục vụ các bài toán phân tích thị trường lao động và nhu cầu kỹ năng tại Đà Nẵng.
+---
 
-🏗️ Kiến trúc tổng thể
+## 2. Tổng quan quy trình thực hiện
 
-Kiến trúc hệ thống tuân theo mô hình Data Engineering tiêu chuẩn:
+Quy trình tổng thể của dự án gồm các bước chính (theo sơ đồ):
 
-Data Source → Ingestion & Processing → Data Staging → Data Warehouse → Data Mart → Analytics
+<img width="1920" height="1080" alt="Bản sao của What is (1)" src="https://github.com/user-attachments/assets/b02b21bb-ea5c-4cfa-9e40-0817bf6b6498" />
 
-Data Source: Website tuyển dụng (DaNangJob, DaNang43)
 
-Ingestion & Processing: Web scraping, làm sạch và chuẩn hóa dữ liệu
+- **Data Source:** Website tuyển dụng (DaNangJob, DaNang43)
 
-Data Staging: Lưu trữ dữ liệu trung gian dưới dạng JSON trên GitHub
+- **Ingestion & Processing:** Web scraping, làm sạch và chuẩn hóa dữ liệu
 
-Data Warehouse: PostgreSQL triển khai trên Google Cloud Platform
+- **Data Staging:** Lưu trữ dữ liệu trung gian ở dạng JSON trên GitHub
 
-Data Mart: Dữ liệu tổng hợp phục vụ các nhu cầu phân tích thường xuyên
+- **Data Warehouse**: PostgreSQL triển khai trên Google Cloud Platform
 
-Analytics: Khai thác dữ liệu cho báo cáo và dashboard (SmartCV)
+- **Data Mart:** Dữ liệu tổng hợp phục vụ phân tích thường xuyên
 
-⚙️ Quy trình triển khai
-1. Thiết kế dữ liệu
+---
 
-Xây dựng ERD (Entity Relationship Diagram) làm nền tảng cho toàn bộ hệ thống
+## 3. Quy trình thực hiện
+🔹 **Bước 1:** Thiết kế Database
 
-Xác định rõ các entity chính và mối quan hệ giữa chúng
+- Xây dựng ERD (Entity Relationship Diagram) trước khi làm dữ liệu
 
-2. Thu thập và tiền xử lý dữ liệu
+- Xác định các bảng chính: Job, Company, Skill, HR, Recruitment Process...
 
-Crawl dữ liệu tuyển dụng bằng Python (Requests, BeautifulSoup)
+🔹**Bước 2:** Web Scraping & Ingestion
 
-Làm sạch dữ liệu, chuẩn hóa định dạng và loại bỏ dữ liệu không hợp lệ
+- Sử dụng Python (Requests + BeautifulSoup) để crawl dữ liệu từ: DaNangJob và DaNang43
 
-Lưu dữ liệu trung gian dưới dạng JSON để dễ kiểm soát và versioning
+- Thực hiện tiền xử lý cơ bản: Làm sạch text, chuẩn hóa định dạng khớp database
 
-3. ETL vào Data Warehouse
+- Lưu dữ liệu trung gian ở dạng JSON trên GitHub (đóng vai trò Data Staging)
 
-Xây dựng pipeline tự động load dữ liệu từ GitHub vào PostgreSQL trên GCP
+🔹**Bước 3:** Pipeline load tự động vào Data Warehouse
 
-Áp dụng schema theo ERD nhằm đảm bảo tính nhất quán dữ liệu
+- Xây dựng pipeline tự động: Load dữ liệu từ GitHub --> Đổ vào PostgreSQL trên Google Cloud --> Đảm bảo dữ liệu đúng schema theo ERD đã thiết kế
 
-4. Xây dựng Data Mart và phân quyền
+🔹 **Bước 4:** Xây dựng  Data Mart
 
-Tạo các Data Mart phục vụ:
+- Tạo Data Mart từ Data Warehouse để phục vụ các nhu cầu phân tích thường xuyên:
 
-Phân tích thị trường việc làm Đà Nẵng
++ Phân tích thị trường việc làm Đà Nẵng
 
-Phân tích yêu cầu kỹ năng theo ngành/nghề
++ Phân tích yêu cầu kỹ năng theo ngành/nghề
 
-Thiết kế cơ chế phân quyền truy cập dữ liệu theo mục đích sử dụng
+- Thiết kế phân quyền truy cập theo mục đích sử dụng dữ liệu
 
-🛠️ Công nghệ sử dụng
+---
 
-Ngôn ngữ: Python
+## 4. Công cụ sử dụng
 
-Web Scraping: Requests, BeautifulSoup
+Python: Requests, BeautifulSoup
 
-Định dạng dữ liệu: JSON
+Data Format: JSON
 
-Quản lý mã nguồn & Staging: GitHub
+Version Control / Staging: GitHub
 
-Cơ sở dữ liệu: PostgreSQL
+Database: PostgreSQL
 
-Nền tảng Cloud: Google Cloud Platform
+Cloud: Google Cloud Platform
 
-Mô hình dữ liệu: ERD
+Data Modeling: ERD
 
-Phân tích & BI: SmartCV
+Analytics: SmartCV / BI tools
 
-🎯 Giá trị mang lại
+---
 
-Chuẩn hóa dữ liệu tuyển dụng từ nhiều nguồn khác nhau
+## 5. Conclusion
 
-Xây dựng nền tảng dữ liệu sẵn sàng cho phân tích và mở rộng
-
-Hỗ trợ phân tích xu hướng tuyển dụng và nhu cầu kỹ năng tại Đà Nẵng
-
-Mô phỏng quy trình Data Engineering thực tế trong doanh nghiệp
-
-📌 Kết luận
-
-Dự án thể hiện cách tiếp cận bài bản trong việc xây dựng ETL Pipeline và Data Warehouse, từ thiết kế dữ liệu đến khai thác phân tích.
-Đây là nền tảng quan trọng cho các ứng dụng data-driven decision making trong phân tích thị trường lao động.
+Dự án này mô phỏng một pipeline ETL & Data Warehouse hoàn chỉnh từ thu thập dữ liệu thực tế đến phân tích.
+Nó giúp chuyển đổi dữ liệu thô từ các website tuyển dụng thành insight có giá trị, phục vụ phân tích thị trường lao động và hỗ trợ ra quyết định dựa trên dữ liệu.
